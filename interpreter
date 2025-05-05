@@ -1,0 +1,40 @@
+from textx import metamodel_from_file
+tracker_mm = metamodel_from_file('calorietracker.tx')
+tracker_model = tracker_mm.model_from_file('calorietest.txt')
+
+class Tracker:
+
+    def interpret(self, model):
+
+    # model is an instance of Program
+        for c in model.commands:
+
+            if c.__class__.__name__ == "HeightCommand":
+                print(f"Height is {c.height}")
+            elif c.__class__.__name__ == "WeightCommand":
+                print(f"Weight is {c.weight}")
+                BMI = (c.height/(c.weight*c.weight))* 703
+                print(f"BMI is ")
+                print(BMI)
+            elif c.__class__.__name__ == "CalorieGoalCommand":
+                print(f"Goal is {c.goal}")
+            elif c.__class__.__name__ == "HealthyCommand":
+              if c.healthypoints == "Wholefood":
+                  c.points == 1
+              elif c.healthypoints == "OkayFood":
+                  c.points == 0.5
+              elif c.healthypoints == "JunkFood":
+                  c.points == -1
+              else:
+                  c.points == 0
+            if c.__class__.__name__ == "HealthyCommand":
+                if(c.goal > c.calories):
+                    print(f"Beat Total Calorie Goal by {c.goal}-{c.calories}")
+                if(c.goal < c.calories):
+                    print(f"Ate Over Goal by {c.calories}-{c.goal}")
+                else:
+                   print("Hit Goal! Congratulations")
+            print(f"You had {c.points} healthy points today")
+            print(f"You had {c.calories} calories today")
+tracker = Tracker()
+tracker.interpret(tracker_model)
