@@ -1,0 +1,26 @@
+Program:
+    'Start Track'
+    commands*=Command 
+    'End Track'
+;
+Command:
+    HeightCommand|WeightCommand|HealthyFoodCommand|JunkFoodCommand|GoalCommand|ModeCommand
+;
+WeightCommand:
+    'weight'(weight=INT)?
+;
+HeightCommand:
+    'height'(height=INT)?
+;
+GoalCommand:
+    'goal'(goal=INT)?
+;
+ModeCommand:
+    'mode' (mode=STRING)?
+;
+HealthyFoodCommand:
+    'healthy' 'food' (calories=INT)?
+;
+JunkFoodCommand:
+    'junk' 'food' (calories=INT)?
+;
